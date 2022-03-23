@@ -10,7 +10,7 @@ import XCTest
 
 class TaskListUseCaseTests: XCTestCase {
     var mockTaskMemoryRepository: MockTaskMemoryRepository!
-    var taskListUseCase: TaskListUseCase!
+    var taskListUseCase: TaskListManageUseCase!
     
     override func setUp() {
         let mockTasks = [
@@ -19,7 +19,7 @@ class TaskListUseCaseTests: XCTestCase {
             Task(id: UUID(), title: "완료", description: "완료_본문", deadline: Date(), state: .done),
         ]
         mockTaskMemoryRepository = MockTaskMemoryRepository(mockTasks: mockTasks)
-        taskListUseCase = DefaultTaskListUseCase(taskRepository: mockTaskMemoryRepository)
+        taskListUseCase = TaskListManageUseCase(taskRepository: mockTaskMemoryRepository)
     }
     
     override func tearDown() {

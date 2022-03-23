@@ -18,10 +18,10 @@ final class TaskListViewModel: TaskViewModel {
     var presentTaskManageView: ((TaskManageViewModel) -> Void)?
     var taskCount: (([(count: Int, state: TaskState)]) -> Void)?
     
-    private let taskListUseCase: TaskListUseCase
+    private let taskListUseCase: TaskListManageUseCase
     private(set) var tasks = [Task]()
     
-    init(taskListUseCase: TaskListUseCase) {
+    init(taskListUseCase: TaskListManageUseCase) {
         self.taskListUseCase = taskListUseCase
     }
     
@@ -75,8 +75,8 @@ final class TaskListViewModel: TaskViewModel {
     }
     
     func addTask() {
-        let taskManageUseCase = DefaultTaskManageUseCase()
-        let taskManageViewModel = TaskManageViewModel(manageType: .add, taskManageUseCase: taskManageUseCase)
+        let inputValidationUseCase = InputValidationUseCase()
+        let taskManageViewModel = TaskManageViewModel(manageType: .add, inputValidationUseCase: inputValidationUseCase)
         presentTaskManageView?(taskManageViewModel)
     }
     
@@ -86,8 +86,8 @@ final class TaskListViewModel: TaskViewModel {
             return
         }
         
-        let taskManageUseCase = DefaultTaskManageUseCase()
-        let taskManageViewModel = TaskManageViewModel(selectedIndex: index, selectedTask: fetchedTask, manageType: .detail, taskManageUseCase: taskManageUseCase)
+        let inputValidationUseCase = InputValidationUseCase()
+        let taskManageViewModel = TaskManageViewModel(selectedIndex: index, selectedTask: fetchedTask, manageType: .detail, inputValidationUseCase: inputValidationUseCase)
         
         presentTaskManageView?(taskManageViewModel)
     }

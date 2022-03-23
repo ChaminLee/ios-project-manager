@@ -21,18 +21,18 @@ final class TaskManageViewModel {
     private(set) var selectedIndex: Int?
     private(set) var selectedTask: Task?
     private(set) var manageType: ManageType
-    private let taskManageUseCase: TaskManageUseCase
+    private let inputValidationUseCase: UserInputValidationUseCase
     var navigationTitle: String? {
         return selectedTask?.state.title
     }
     
-    init(manageType: ManageType, taskManageUseCase: TaskManageUseCase) {
+    init(manageType: ManageType, inputValidationUseCase: UserInputValidationUseCase) {
         self.manageType = manageType
-        self.taskManageUseCase = taskManageUseCase
+        self.inputValidationUseCase = inputValidationUseCase
     }
     
-    convenience init(selectedIndex: Int, selectedTask: Task, manageType: ManageType, taskManageUseCase: TaskManageUseCase) {
-        self.init(manageType: manageType, taskManageUseCase: taskManageUseCase)
+    convenience init(selectedIndex: Int, selectedTask: Task, manageType: ManageType, inputValidationUseCase: UserInputValidationUseCase) {
+        self.init(manageType: manageType, inputValidationUseCase: inputValidationUseCase)
         self.selectedIndex = selectedIndex
         self.selectedTask = selectedTask
         self.taskTitle = selectedTask.title
@@ -54,7 +54,7 @@ final class TaskManageViewModel {
     }
     
     func didTapDoneButton() {
-        let result = taskManageUseCase.checkValidInput(title: taskTitle, description: taskDescription)
+        let result = inputValidationUseCase.checkValidInput(title: taskTitle, description: taskDescription)
         
         switch result {
         case .success:
@@ -65,7 +65,7 @@ final class TaskManageViewModel {
     }
     
     func checkValidTextLength(with range: NSRange, length: Int) -> Bool {
-        let isValid = taskManageUseCase.checkValidTextLength(with: range, length: length)
+        let isValid = inputValidationUseCase.checkValidTextLength(with: range, length: length)
         
         if !isValid {
             presentErrorAlert?(TextError.outOfBounds(length))
