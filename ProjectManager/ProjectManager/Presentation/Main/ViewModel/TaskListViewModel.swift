@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class TaskListViewModel: TaskViewModel {
+final class TaskListViewModel {
     // MARK: - Output
     var presentErrorAlert: ((Error) -> Void)?
     var reloadTableView: (() -> Void)?
