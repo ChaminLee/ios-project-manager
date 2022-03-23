@@ -11,7 +11,7 @@ final class TaskManageViewModel {
     // MARK: - Output
     var presentErrorAlert: ((Error) -> Void)?
     var dismissWithTaskCreate: ((Task) -> Void)?
-    var dismissWithTaskUpdate: ((SelectedTaskViewModel) -> Void)?
+    var dismissWithTaskUpdate: ((SelectedTask) -> Void)?
     var changeManageTypeToEdit: ((ManageType) -> Void)?
     
     // MARK: - Properties
@@ -49,8 +49,8 @@ final class TaskManageViewModel {
         }
         
         let task = Task(id: selectedTask.id, title: taskTitle, description: taskDescription, deadline: taskDeadline, state: selectedTask.state)
-        let selectedTaskViewModel = SelectedTaskViewModel(index: selectedIndex, task: task, manageType: manageType)
-        dismissWithTaskUpdate?(selectedTaskViewModel)
+        let taskToUpdate = SelectedTask(index: selectedIndex, task: task, manageType: manageType)
+        dismissWithTaskUpdate?(taskToUpdate)
     }
     
     func didTapDoneButton() {

@@ -83,8 +83,8 @@ final class TaskManageViewController: UIViewController {
             self?.dismiss(animated: true, completion: nil)
         }
         
-        taskManageViewModel.dismissWithTaskUpdate = { [weak self] selectedTaskViewModel in
-            self?.updateTask(with: selectedTaskViewModel)
+        taskManageViewModel.dismissWithTaskUpdate = { [weak self] selectedTask in
+            self?.updateTask(with: selectedTask)
             self?.dismiss(animated: true, completion: nil)
         }
         
@@ -193,8 +193,8 @@ final class TaskManageViewController: UIViewController {
         delegate?.taskManageViewDidCreate(with: task)
     }
     
-    private func updateTask(with selectedTaskViewModel: SelectedTaskViewModel) {
-        delegate?.taskManageViewDidUpdate(at: selectedTaskViewModel.index, with: selectedTaskViewModel.task)
+    private func updateTask(with selectedTask: SelectedTask) {
+        delegate?.taskManageViewDidUpdate(at: selectedTask.index, with: selectedTask.task)
     }
     
     private func presentAlert(title: String, message: String) {
